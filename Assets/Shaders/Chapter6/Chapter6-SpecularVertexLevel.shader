@@ -45,9 +45,10 @@
 				// Compute diffuse term
 				fixed3 diffuse = _LightColor0.rgb * _Diffuse.rgb * saturate(dot(worldNormal, worldLightDir));
 				
-				// Get the reflect direction in world space
+				// Get the reflect direction in world space  // reflect 光的入射方向,法线方向
 				fixed3 reflectDir = normalize(reflect(-worldLightDir, worldNormal));
 				// Get the view direction in world space
+				// Phone specular 模型
 				fixed3 viewDir = normalize(_WorldSpaceCameraPos.xyz - mul(_Object2World, v.vertex).xyz);
 				
 				// Compute specular term

@@ -54,16 +54,17 @@
 				fixed3 worldNormal = normalize(i.worldNormal);
 				fixed3 worldLightDir = normalize(UnityWorldSpaceLightDir(i.worldPos));
 				
+				// 没有自发光
 				// Use the texture to sample the diffuse color
-				fixed3 albedo = tex2D(_MainTex, i.uv).rgb * _Color.rgb;
+				fixed3 albedo = tex2D(_MainTex, i.uv).rgb * _Color.rgb; // 反照率
 				
-				fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz * albedo;
+				fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz * albedo; // 环境光
 				
-				fixed3 diffuse = _LightColor0.rgb * albedo * max(0, dot(worldNormal, worldLightDir));
+				fixed3 diffuse = _LightColor0.rgb * albedo * max(0, dot(worldNormal, worldLightDir)); // 漫反射
 				
 				fixed3 viewDir = normalize(UnityWorldSpaceViewDir(i.worldPos));
 				fixed3 halfDir = normalize(worldLightDir + viewDir);
-				fixed3 specular = _LightColor0.rgb * _Specular.rgb * pow(max(0, dot(worldNormal, halfDir)), _Gloss);
+				fixed3 specular = _LightColor0.rgb * _Specular.rgb * pow(max(0, dot(worldNormal, halfDir)), _Gloss);  // 高光
 				
 				return fixed4(ambient + diffuse + specular, 1.0);
 			}

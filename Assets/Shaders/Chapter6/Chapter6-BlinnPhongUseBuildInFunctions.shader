@@ -55,7 +55,7 @@
 				// Use the build-in funtion to compute the view direction in world space
 				// Remember to normalize the result
 				fixed3 viewDir = normalize(UnityWorldSpaceViewDir(i.worldPos));
-				fixed3 halfDir = normalize(worldLightDir + viewDir);
+				fixed3 halfDir = normalize(worldLightDir + viewDir); // blinn-phone
 				fixed3 specular = _LightColor0.rgb * _Specular.rgb * pow(max(0, dot(worldNormal, halfDir)), _Gloss);
 				
 				return fixed4(ambient + diffuse + specular, 1.0);

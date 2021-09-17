@@ -72,7 +72,7 @@
 				
 				// Get the normal in tangent space
 				fixed3 bump = UnpackNormal(tex2D(_BumpMap, i.uv.zw));
-				bump.xy *= _BumpScale;
+				bump.xy *= _BumpScale; // _BumpScale越大法线偏移的越厉害
 				bump.z = sqrt(1.0 - saturate(dot(bump.xy, bump.xy)));
 				// Transform the narmal from tangent space to world space
 				bump = normalize(half3(dot(i.TtoW0.xyz, bump), dot(i.TtoW1.xyz, bump), dot(i.TtoW2.xyz, bump)));

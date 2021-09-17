@@ -38,7 +38,8 @@
 				// Get the light direction in world space
 				fixed3 worldLight = normalize(_WorldSpaceLightPos0.xyz);
 				// Compute diffuse term
-				fixed3 diffuse = _LightColor0.rgb * _Diffuse.rgb * saturate(dot(worldNormal, worldLight));
+				// 漫反射:兰伯特定律 lambert [0-1] 截断，截断的被光面可能都为0，即被光面都为黑色
+				fixed3 diffuse = _LightColor0.rgb * _Diffuse.rgb * saturate(dot(worldNormal, worldLight)); 
 				
 				o.color = ambient + diffuse;
 				

@@ -46,7 +46,8 @@
 				fixed3 worldLightDir = normalize(_WorldSpaceLightPos0.xyz);
 				
 				// Compute diffuse term
-				fixed halfLambert = dot(worldNormal, worldLightDir) * 0.5 + 0.5;
+				// 漫反射:半兰伯特 [0-1] 非截断,被光面依然是有亮度的
+				fixed halfLambert = dot(worldNormal, worldLightDir) * 0.5 + 0.5; 
 				fixed3 diffuse = _LightColor0.rgb * _Diffuse.rgb * halfLambert;
 				
 				fixed3 color = ambient + diffuse;

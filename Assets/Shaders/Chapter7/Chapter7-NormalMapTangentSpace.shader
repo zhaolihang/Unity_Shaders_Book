@@ -99,7 +99,8 @@ Shader "Unity Shaders Book/Chapter 7/Normal Map In Tangent Space" {
 				*/
 				
 				//wToT = the inverse of tToW = the transpose of tToW as long as tToW is an orthogonal matrix.
-				float3x3 worldToTangent = float3x3(worldTangent, worldBinormal, worldNormal);
+				// shader中的向量按照行存储
+				float3x3 worldToTangent = float3x3(worldTangent, worldBinormal, worldNormal); //  = transpose(tangentToWorldMat)
 
 				// Transform the light and view dir from world space to tangent space
 				o.lightDir = mul(worldToTangent, WorldSpaceLightDir(v.vertex));
